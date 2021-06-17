@@ -1,0 +1,1194 @@
+{
+  "weather": {
+    "template": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "1.2",
+      "body": [
+        {
+          "type": "TextBlock",
+          "text": "${name}, ${country}",
+          "size": "Large",
+          "isSubtle": true,
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "{{DATE(${formatEpoch(dt, 'yyyy-MM-ddTHH:mm:ssZ')}, SHORT)}} {{TIME(${formatEpoch(dt, 'yyyy-MM-ddTHH:mm:ssZ')})}}",
+          "spacing": "None",
+          "wrap": true
+        },
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "${url}",
+                  "size": "Small"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "${temp}",
+                  "size": "ExtraLarge",
+                  "spacing": "None",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "°C",
+                  "weight": "Bolder",
+                  "spacing": "Small",
+                  "wrap": true
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Hi ${tempMax}",
+                  "horizontalAlignment": "Left",
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Lo ${tempMin}",
+                  "horizontalAlignment": "Left",
+                  "spacing": "None",
+                  "wrap": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "data": {
+      "coord": {
+        "lon": -122.12,
+        "lat": 47.67
+      },
+      "weather": [
+        {
+          "id": 802,
+          "main": "Clouds",
+          "description": "scattered clouds",
+          "icon": "03n"
+        }
+      ],
+      "base": "stations",
+      "main": {
+        "temp": 281.05,
+        "pressure": 1022,
+        "humidity": 81,
+        "tempMin": 278.15,
+        "tempMax": 283.15
+      },
+      "visibility": 16093,
+      "wind": {
+        "speed": 4.1,
+        "deg": 360
+      },
+      "rain": {},
+      "clouds": {
+        "all": 40
+      },
+      "dt": 1572920478,
+      "sys": {
+        "type": 1,
+        "id": 5798,
+        "country": "US",
+        "sunrise": 1572879421,
+        "sunset": 1572914822
+      },
+      "timezone": -28800,
+      "id": 5808079,
+      "name": "Redmond",
+      "cod": 200
+    }
+  },
+  "documentList": {
+    "template": {
+      "type": "AdaptiveCard",
+      "body": [
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Showing 1 to 5",
+              "wrap": true,
+              "horizontalAlignment": "Right",
+              "fontType": "Default",
+              "size": "ExtraLarge",
+              "weight": "Lighter",
+              "id": "icm_head"
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "spacing": "Large",
+          "separator": true,
+          "$data": "${Data}",
+          "items": [
+            {
+              "type": "RichTextBlock",
+              "inlines": [
+                {
+                  "type": "TextRun",
+                  "text": "${Name}",
+                  "weight": "Bolder",
+                  "color": "Accent",
+                  "id": "icm_name"
+                },
+                {
+                  "type": "TextRun",
+                  "text": "\n(Code: ${ICMAgreementCode})",
+                  "weight": "Lighter",
+                  "color": "Light",
+                  "id": "icm_code"
+                },
+                {
+                  "type": "TextRun",
+                  "text": " | ",
+                  "size": "Medium",
+                  "weight": "Bolder"
+                },
+                {
+                  "type": "TextRun",
+                  "text": "${Status}",
+                  "size": "Small",
+                  "weight": "Bolder",
+                  "color": "${if(Status == 'Expired', 'warning', 'light')}",
+                  "id": "${if(Status == 'Expired', 'icm_status_expired', 'icm_status')}"
+                }
+              ]
+            },
+            {
+              "type": "TextBlock",
+              "text": "${CreatedBy}",
+              "wrap": true,
+              "spacing": "Medium",
+              "separator": true,
+              "weight": "Bolder",
+              "id": "icm_createdby"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Created ${CreatedDate}",
+              "wrap": true,
+              "color": "Light",
+              "id": "icm_createddate"
+            },
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "wrap": true,
+                      "text": "${formatNumber(ICMTotalAmount.value, 2)} ${ICMTotalAmount.Currency}",
+                      "horizontalAlignment": "Right",
+                      "spacing": "Medium",
+                      "separator": true,
+                      "weight": "Bolder",
+                      "color": "Good",
+                      "id": "icm_amount"
+                    }
+                  ],
+                  "horizontalAlignment": "Right"
+                }
+              ],
+              "spacing": "Medium",
+              "separator": true
+            },
+            {
+              "type": "ActionSet",
+              "actions": [
+                {
+                  "type": "Action.OpenUrl",
+                  "title": "Details",
+                  "style": "positive",
+                  "url": "#",
+                  "id": "icm_btn_details"
+                }
+              ],
+              "spacing": "Medium"
+            }
+          ]
+        }
+      ],
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "version": "1.3"
+    },
+    "data": {
+      "Messages": null,
+      "Data": [
+        {
+          "ICMIsAssignment": false,
+          "ICMValidationComments": "",
+          "ICMAmount": 750.0,
+          "ICMIBAN": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": "10174800"
+          },
+          "ICMSupplierContactName": "Marika RUDLER",
+          "ICMParentContractType": null,
+          "ICMTriggerNotifications": null,
+          "ICMIsAgreementAlreadySignedByBothParties": "Oui",
+          "ICMURSSAFExpiryDate": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": ""
+          },
+          "ICMIsTermination": false,
+          "ICMLastSignedDate": "2019-06-14T00:00:00",
+          "ICMTerminationDate": null,
+          "ICMVATRegNo": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": "FR87521400051"
+          },
+          "ICMDepartment": {
+            "UniqueValues": [
+              "a18aa98e-b6e8-4de8-9aa0-bf1f7b7b4121"
+            ],
+            "DisplayValue": "Medical - Opérations cliniques"
+          },
+          "ICMAssignedParentId": "",
+          "ICMCreatingonBehalfofOther": "Oui",
+          "ICMAdditionalpresentationdescription": "",
+          "ICMVendortoSignElectronically": "Non",
+          "ICMICMPersonalDataGDPR": "",
+          "ICMLocation": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": "PARIS"
+          },
+          "ICMAbbvieSignatoryName": "Peggy.Derambure@abbvie.com",
+          "ICMEffectiveDate": "2019-06-14T00:00:00",
+          "ICMTotalAmount": {
+            "Value": 750.0,
+            "Currency": "EUR"
+          },
+          "ICMLabellastsigneddatetobefilledafterexecutionofagreement": "",
+          "FilePath": {
+            "Content": null,
+            "Extension": "PDF",
+            "Path": "default:\\agreements\\ICMContactLegalAvantDeLoaderUnDocument_ea16dc95-dc83-43ad-86ee-4494dd228d9c1.Pdf"
+          },
+          "ICMNumberofthisAmendment": "",
+          "ICMUseAmendmentTemplate": false,
+          "ICMReasonforchangingtheamount": [
+
+          ],
+          "ICMAbbvieContactEmail": "sophie.carret@abbvie.com",
+          "ICMCountry": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": "France"
+          },
+          "ICMCopyTerminationDate": null,
+          "ICMAbbvieSignatoryTitle2": "",
+          "ICMCurrency": "EUR",
+          "ICMCausefortheamendmentcreation": "",
+          "ICMIsAssigned": false,
+          "ICMNewcontracttotalamount": null,
+          "ICMImpactPharmaceutique": "Non",
+          "ICMRiskClaimQualityProductOrMaterovigilance": "Non",
+          "ICMAbbvieSignatoryName2": "",
+          "ICMSerapprocherduservicePVouqualiteenfonctiondurisque": "",
+          "ICMKBISExpiryDate": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": ""
+          },
+          "ICMSupplierName": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": "RUDLER MARIKA"
+          },
+          "ICMAmendment5SignatoryDate": null,
+          "ICMSiret": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": "52140005100012"
+          },
+          "ICMAbbvieSignatoryTitle": "Responsable Operations Cliniques",
+          "ICMAmendmentEffectiveDate2": null,
+          "ICMdummyNotUsed": "",
+          "ICMServicesDescription": "Participation à une étude clinique observationnelle",
+          "ICMTransparenceAttributeActive": "Oui",
+          "ICMSupplierContactEmail": "",
+          "ICMTemplate": {
+            "Name": "",
+            "Version": "",
+            "Extensions": null
+          },
+          "ICMContactLegal": "",
+          "ICMIsAmendment": false,
+          "ICMTerminatedParentId": "",
+          "ICMSupplierSignatoryName2": "",
+          "ICMSelectAmendmentcreationreason": [
+
+          ],
+          "ICMSelectOnBehalfofUser": "sophie.carret@abbvie.com",
+          "ICMDMOSLabel": "",
+          "ICMStreetName": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": "8 RUE JEAN COLLY"
+          },
+          "ICMExpiryDate": "2021-06-14T00:00:00",
+          "ICMTotalamountofparentagreementandamendments": null,
+          "ICMAmendment10SignatoryDate": null,
+          "ICMSignatoryDateofthePreviousAmendment": null,
+          "ICMIfitisanamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment7SignatoryDate": null,
+          "ICMIsExecutedWithoutSignedCopy": false,
+          "ICMSupplierSignatoryTitle": "",
+          "ICMReputationalRisk": "Non",
+          "ICMExternalSignatory": "",
+          "ICMContratpapierrecu": "Non",
+          "ICMPostalCode": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": "75018"
+          },
+          "ICMSignatureType": "Manual Signature",
+          "ICMAssuranceExpiryDate": {
+            "UniqueValues": [
+              "9e668630-8374-4f0b-a9d1-f0e1047b6a91"
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAmendment9SignatoryDate": null,
+          "ICMAmendment8SignatoryDate": null,
+          "ICMDateofadditionalprestation": null,
+          "ICMSignatureSequence": "",
+          "ICMAmendment6SignatoryDate": null,
+          "ICMAdditionalchargesforadditionalprestation": {
+            "Value": 0.0,
+            "Currency": ""
+          },
+          "ICMIstherePreviousAmendment": "",
+          "ICMSubcontractingDMOS": "Non",
+          "ICMAmendment2SignatoryDate": null,
+          "ICMAgreementCode": "2019-8-TRP_02448",
+          "ICMCreationDate": "",
+          "ICMIfnotamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment4SignatoryDate": null,
+          "ICMFichecontratarchivee": "Non",
+          "ICMAmendment3SignatoryDate": null,
+          "ICMAbbVieContactPerson": "sophie.carret@abbvie.com",
+          "ICMLinktoVendorMaster": "<a target=\"_blank\" href=\"https://abbviefrance.icertis.com/Masterdata/Details?entityName=ICMMaitredeFournisseurs&id=9e668630-8374-4f0b-a9d1-f0e1047b6a91\">Base de données fournisseurs</a>",
+          "Name": "eVIEdence - Contrat URSSAF co-investigateur Dr RUDLER",
+          "ICMContactLegalAvantDeLoaderUnDocumentAmendmentCollection": null,
+          "ICMAttachementsSupplementaires": null,
+          "ICMAttachements": null,
+          "ICMScanDuContratSigne": null,
+          "BusinessStatus": "Expiré",
+          "TypeOfPaper": "Third Party",
+          "IsPublished": true,
+          "IsDeviated": false,
+          "Status": "Expired",
+          "CreatedBy": "elisa.boudar@abbvie.com",
+          "CreatedDate": "2019-08-02T08:52:04",
+          "ModifiedBy": "elisa.boudar@abbvie.com",
+          "ModifiedDate": "2021-06-14T23:59:16",
+          "SysId": "ea16dc95-dc83-43ad-86ee-4494dd228d9c",
+          "TypeOfContract": "Agreement",
+          "ContractTypeName": "ICMContactLegalAvantDeLoaderUnDocument"
+        },
+        {
+          "ICMIsAssignment": false,
+          "ICMValidationComments": "",
+          "ICMAmount": 0.0,
+          "ICMIBAN": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "10011687"
+          },
+          "ICMSupplierContactName": "Céline JEAN ROMAIN",
+          "ICMParentContractType": null,
+          "ICMTriggerNotifications": 1,
+          "ICMIsAgreementAlreadySignedByBothParties": "Non",
+          "ICMURSSAFExpiryDate": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "11/27/2021 12:00:00 AM"
+          },
+          "ICMIsTermination": false,
+          "ICMLastSignedDate": null,
+          "ICMTerminationDate": null,
+          "ICMVATRegNo": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "FR86382650604"
+          },
+          "ICMDepartment": {
+            "UniqueValues": [
+              "e82b0508-547f-4caf-a919-5b32a4fcb77e"
+            ],
+            "DisplayValue": "Legal"
+          },
+          "ICMAssignedParentId": "",
+          "ICMCreatingonBehalfofOther": "Non",
+          "ICMAdditionalpresentationdescription": "",
+          "ICMVendortoSignElectronically": "Non",
+          "ICMICMPersonalDataGDPR": "",
+          "ICMLocation": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "PARIS 2"
+          },
+          "ICMAbbvieSignatoryName": "pierreclaude.fumoleau@abbvie.com",
+          "ICMEffectiveDate": "2021-06-25T00:00:00",
+          "ICMTotalAmount": {
+            "Value": 0.0,
+            "Currency": "EUR"
+          },
+          "ICMLabellastsigneddatetobefilledafterexecutionofagreement": "",
+          "FilePath": {
+            "Content": null,
+            "Extension": "PDF",
+            "Path": "default:\\agreements\\ICMContactLegalAvantDeLoaderUnDocument_9a6056d5-931a-4e70-a7e3-66bfa42cdb2b_1.Pdf"
+          },
+          "ICMNumberofthisAmendment": "",
+          "ICMUseAmendmentTemplate": false,
+          "ICMReasonforchangingtheamount": [
+
+          ],
+          "ICMAbbvieContactEmail": "Celine.delnieppe@abbvie.com",
+          "ICMCountry": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "France"
+          },
+          "ICMCopyTerminationDate": null,
+          "ICMAbbvieSignatoryTitle2": "",
+          "ICMCurrency": "EUR",
+          "ICMCausefortheamendmentcreation": "",
+          "ICMIsAssigned": false,
+          "ICMNewcontracttotalamount": null,
+          "ICMImpactPharmaceutique": "Non",
+          "ICMRiskClaimQualityProductOrMaterovigilance": "Non",
+          "ICMAbbvieSignatoryName2": "",
+          "ICMSerapprocherduservicePVouqualiteenfonctiondurisque": "",
+          "ICMKBISExpiryDate": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "8/27/2021 12:00:00 AM"
+          },
+          "ICMSupplierName": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "MARGAUX ORANGE"
+          },
+          "ICMAmendment5SignatoryDate": null,
+          "ICMSiret": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "38265060400020"
+          },
+          "ICMAbbvieSignatoryTitle": "Directeur juridique",
+          "ICMAmendmentEffectiveDate2": null,
+          "ICMdummyNotUsed": "",
+          "ICMServicesDescription": "xxxx",
+          "ICMTransparenceAttributeActive": "Non",
+          "ICMSupplierContactEmail": "celine.jeanromain@gmail.com",
+          "ICMTemplate": {
+            "Name": "",
+            "Version": "",
+            "Extensions": null
+          },
+          "ICMContactLegal": "",
+          "ICMIsAmendment": false,
+          "ICMTerminatedParentId": "",
+          "ICMSupplierSignatoryName2": "xxxxxxxxx",
+          "ICMSelectAmendmentcreationreason": [
+
+          ],
+          "ICMSelectOnBehalfofUser": "",
+          "ICMDMOSLabel": "",
+          "ICMStreetName": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "20 RUE DU MAIL"
+          },
+          "ICMExpiryDate": "2021-06-27T00:00:00",
+          "ICMTotalamountofparentagreementandamendments": null,
+          "ICMAmendment10SignatoryDate": null,
+          "ICMSignatoryDateofthePreviousAmendment": null,
+          "ICMIfitisanamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment7SignatoryDate": null,
+          "ICMIsExecutedWithoutSignedCopy": false,
+          "ICMSupplierSignatoryTitle": "",
+          "ICMReputationalRisk": "Non",
+          "ICMExternalSignatory": "",
+          "ICMContratpapierrecu": "Non",
+          "ICMPostalCode": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "75002"
+          },
+          "ICMSignatureType": "Manual Signature",
+          "ICMAssuranceExpiryDate": {
+            "UniqueValues": [
+              "a0efc42f-327b-4e39-8094-4b4f78c3da90"
+            ],
+            "DisplayValue": "12/31/2021 12:00:00 AM"
+          },
+          "ICMAmendment9SignatoryDate": null,
+          "ICMAmendment8SignatoryDate": null,
+          "ICMDateofadditionalprestation": null,
+          "ICMSignatureSequence": "Internal First",
+          "ICMAmendment6SignatoryDate": null,
+          "ICMAdditionalchargesforadditionalprestation": {
+            "Value": 0.0,
+            "Currency": ""
+          },
+          "ICMIstherePreviousAmendment": "",
+          "ICMSubcontractingDMOS": "Non",
+          "ICMAmendment2SignatoryDate": null,
+          "ICMAgreementCode": "2021-6-TRP_05627",
+          "ICMCreationDate": "",
+          "ICMIfnotamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment4SignatoryDate": null,
+          "ICMFichecontratarchivee": "Non",
+          "ICMAmendment3SignatoryDate": null,
+          "ICMAbbVieContactPerson": "Celine.delnieppe@abbvie.com",
+          "ICMLinktoVendorMaster": "<a target=\"_blank\" href=\"https://abbviefranceupgrade.icertis.com/Masterdata/Details?entityName=ICMMaitredeFournisseurs&id=a0efc42f-327b-4e39-8094-4b4f78c3da90\">Base de données fournisseurs</a>",
+          "Name": "xxxxxxxxxxxxxx",
+          "ICMContactLegalAvantDeLoaderUnDocumentAmendmentCollection": null,
+          "ICMAttachementsSupplementaires": null,
+          "ICMAttachements": null,
+          "ICMScanDuContratSigne": null,
+          "BusinessStatus": "Draft",
+          "TypeOfPaper": "Third Party",
+          "IsPublished": true,
+          "IsDeviated": false,
+          "Status": "Draft",
+          "CreatedBy": "Celine.delnieppe@abbvie.com",
+          "CreatedDate": "2021-06-14T13:12:02",
+          "ModifiedBy": "Celine.delnieppe@abbvie.com",
+          "ModifiedDate": "2021-06-14T13:12:16",
+          "SysId": "9a6056d5-931a-4e70-a7e3-66bfa42cdb2b",
+          "TypeOfContract": "Agreement",
+          "ContractTypeName": "ICMContactLegalAvantDeLoaderUnDocument"
+        },
+        {
+          "ICMIsAssignment": false,
+          "ICMValidationComments": "",
+          "ICMAmount": 34000.0,
+          "ICMIBAN": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "10221101"
+          },
+          "ICMSupplierContactName": "Béatrice Clairaz",
+          "ICMParentContractType": null,
+          "ICMTriggerNotifications": null,
+          "ICMIsAgreementAlreadySignedByBothParties": "Non",
+          "ICMURSSAFExpiryDate": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "6/3/2020 12:00:00 AM"
+          },
+          "ICMIsTermination": false,
+          "ICMLastSignedDate": "2019-11-22T00:00:00",
+          "ICMTerminationDate": null,
+          "ICMVATRegNo": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "#"
+          },
+          "ICMDepartment": {
+            "UniqueValues": [
+              "e7136962-20c3-4bc7-b7ca-6cbb27e8c099"
+            ],
+            "DisplayValue": "Immuno IBU"
+          },
+          "ICMAssignedParentId": "",
+          "ICMCreatingonBehalfofOther": "Non",
+          "ICMAdditionalpresentationdescription": "",
+          "ICMVendortoSignElectronically": "Non",
+          "ICMICMPersonalDataGDPR": "Oui",
+          "ICMLocation": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "BIEVRES"
+          },
+          "ICMAbbvieSignatoryName": "Audrey.Roudheille@abbvie.com",
+          "ICMEffectiveDate": "2019-11-25T00:00:00",
+          "ICMTotalAmount": {
+            "Value": 34000.0,
+            "Currency": "EUR"
+          },
+          "ICMLabellastsigneddatetobefilledafterexecutionofagreement": "",
+          "FilePath": {
+            "Content": null,
+            "Extension": "PDF",
+            "Path": "default:\\agreements\\ICMContactLegalAvantDeLoaderUnDocument_dfd09d3d-5814-4150-8812-d6ad992fdf32_2.Pdf"
+          },
+          "ICMNumberofthisAmendment": "",
+          "ICMUseAmendmentTemplate": false,
+          "ICMReasonforchangingtheamount": [
+
+          ],
+          "ICMAbbvieContactEmail": "Delphine.trionemartignon@abbvie.com",
+          "ICMCountry": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "France"
+          },
+          "ICMCopyTerminationDate": null,
+          "ICMAbbvieSignatoryTitle2": "",
+          "ICMCurrency": "EUR",
+          "ICMCausefortheamendmentcreation": "",
+          "ICMIsAssigned": false,
+          "ICMNewcontracttotalamount": null,
+          "ICMImpactPharmaceutique": "Non",
+          "ICMRiskClaimQualityProductOrMaterovigilance": "Non",
+          "ICMAbbvieSignatoryName2": "",
+          "ICMSerapprocherduservicePVouqualiteenfonctiondurisque": "",
+          "ICMKBISExpiryDate": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "6/2/2020 12:00:00 AM"
+          },
+          "ICMSupplierName": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "ASSOCIATION SFSPO"
+          },
+          "ICMAmendment5SignatoryDate": null,
+          "ICMSiret": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "#"
+          },
+          "ICMAbbvieSignatoryTitle": "Business Unit Manager IBU",
+          "ICMAmendmentEffectiveDate2": null,
+          "ICMdummyNotUsed": "",
+          "ICMServicesDescription": "Analyser pendant 6 mois, l’impact et l’intérêt de l’accompagnement pharmaceutique d’un patient atteint d’une maladie Inflammatoire Chronique sous traitement anti-TNFalpha. A ce titre l’Association étudiera la faisabilité de ce type d’accompagnement et le fait qu’une relation personnalisée entre membre de l’équipe officinale et un patient MIC favorise l’adhésion au traitement par AntiTNF Alfa. L’Association déploiera le projet auprès d’au moins 80 patients et à travers 2 groupements de pharmacies de plus de 500 pharmacies. A ce titre l’Association s’engage à suivre le bon déroulement du Projet et répondre à toutes questions que pourrait avoir les équipes officinales engagées dans celui-ci. L’Association devra mettre à disposition l’ensemble des outils AbbVie, listés en Annexe 2 de l’Accord, nécessaire aux équipes officinales dans le cadre du Projet. A ce titre, elle créera une plateforme accueillant l’ensemble des outils, cette plateforme étant directement lié à la date de validité",
+          "ICMTransparenceAttributeActive": "Non",
+          "ICMSupplierContactEmail": "pharmalune@orange.fr",
+          "ICMTemplate": {
+            "Name": "",
+            "Version": "",
+            "Extensions": null
+          },
+          "ICMContactLegal": "",
+          "ICMIsAmendment": false,
+          "ICMTerminatedParentId": "",
+          "ICMSupplierSignatoryName2": "Béatrice Clairaz",
+          "ICMSelectAmendmentcreationreason": [
+
+          ],
+          "ICMSelectOnBehalfofUser": "",
+          "ICMDMOSLabel": "",
+          "ICMStreetName": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "95B RUE DE PARIS"
+          },
+          "ICMExpiryDate": "2021-06-12T00:00:00",
+          "ICMTotalamountofparentagreementandamendments": null,
+          "ICMAmendment10SignatoryDate": null,
+          "ICMSignatoryDateofthePreviousAmendment": null,
+          "ICMIfitisanamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment7SignatoryDate": null,
+          "ICMIsExecutedWithoutSignedCopy": false,
+          "ICMSupplierSignatoryTitle": "Co-Présidente",
+          "ICMReputationalRisk": "Non",
+          "ICMExternalSignatory": "",
+          "ICMContratpapierrecu": "Non",
+          "ICMPostalCode": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "91570"
+          },
+          "ICMSignatureType": "Electronic Signature",
+          "ICMAssuranceExpiryDate": {
+            "UniqueValues": [
+              "9fe39dd5-0eea-40eb-ac8b-9e802325fe2b"
+            ],
+            "DisplayValue": "12/31/2020 12:00:00 AM"
+          },
+          "ICMAmendment9SignatoryDate": null,
+          "ICMAmendment8SignatoryDate": null,
+          "ICMDateofadditionalprestation": null,
+          "ICMSignatureSequence": "",
+          "ICMAmendment6SignatoryDate": null,
+          "ICMAdditionalchargesforadditionalprestation": {
+            "Value": 0.0,
+            "Currency": ""
+          },
+          "ICMIstherePreviousAmendment": "",
+          "ICMSubcontractingDMOS": "Non",
+          "ICMAmendment2SignatoryDate": null,
+          "ICMAgreementCode": "2019-11-TRP_02553",
+          "ICMCreationDate": "",
+          "ICMIfnotamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment4SignatoryDate": null,
+          "ICMFichecontratarchivee": "Non",
+          "ICMAmendment3SignatoryDate": null,
+          "ICMAbbVieContactPerson": "Delphine.trionemartignon@abbvie.com",
+          "ICMLinktoVendorMaster": "<a target=\"_blank\" href=\"https://abbviefrance.icertis.com/Masterdata/Details?entityName=ICMMaitredeFournisseurs&id=9fe39dd5-0eea-40eb-ac8b-9e802325fe2b\">Base de données fournisseurs</a>",
+          "Name": "Partenariat SFSPO ",
+          "ICMContactLegalAvantDeLoaderUnDocumentAmendmentCollection": null,
+          "ICMAttachementsSupplementaires": null,
+          "ICMAttachements": null,
+          "ICMScanDuContratSigne": null,
+          "BusinessStatus": "Expiré",
+          "TypeOfPaper": "Third Party",
+          "IsPublished": true,
+          "IsDeviated": false,
+          "Status": "Expired",
+          "CreatedBy": "Delphine.trionemartignon@abbvie.com",
+          "CreatedDate": "2019-11-19T08:45:51",
+          "ModifiedBy": "Delphine.trionemartignon@abbvie.com",
+          "ModifiedDate": "2021-06-12T23:59:40",
+          "SysId": "dfd09d3d-5814-4150-8812-d6ad992fdf32",
+          "TypeOfContract": "Agreement",
+          "ContractTypeName": "ICMContactLegalAvantDeLoaderUnDocument"
+        },
+        {
+          "ICMIsAssignment": false,
+          "ICMValidationComments": "",
+          "ICMAmount": 0.0,
+          "ICMIBAN": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMSupplierContactName": "",
+          "ICMParentContractType": null,
+          "ICMTriggerNotifications": 1,
+          "ICMIsAgreementAlreadySignedByBothParties": "Non",
+          "ICMURSSAFExpiryDate": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMIsTermination": false,
+          "ICMLastSignedDate": null,
+          "ICMTerminationDate": null,
+          "ICMVATRegNo": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMDepartment": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAssignedParentId": "",
+          "ICMCreatingonBehalfofOther": "Non",
+          "ICMAdditionalpresentationdescription": "",
+          "ICMVendortoSignElectronically": "Non",
+          "ICMICMPersonalDataGDPR": "",
+          "ICMLocation": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAbbvieSignatoryName": "",
+          "ICMEffectiveDate": null,
+          "ICMTotalAmount": {
+            "Value": 0.0,
+            "Currency": "EUR"
+          },
+          "ICMLabellastsigneddatetobefilledafterexecutionofagreement": "",
+          "FilePath": {
+            "Content": null,
+            "Extension": null,
+            "Path": ""
+          },
+          "ICMNumberofthisAmendment": "",
+          "ICMUseAmendmentTemplate": false,
+          "ICMReasonforchangingtheamount": [
+
+          ],
+          "ICMAbbvieContactEmail": "",
+          "ICMCountry": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMCopyTerminationDate": null,
+          "ICMAbbvieSignatoryTitle2": "",
+          "ICMCurrency": "EUR",
+          "ICMCausefortheamendmentcreation": "",
+          "ICMIsAssigned": false,
+          "ICMNewcontracttotalamount": null,
+          "ICMImpactPharmaceutique": "",
+          "ICMRiskClaimQualityProductOrMaterovigilance": "",
+          "ICMAbbvieSignatoryName2": "",
+          "ICMSerapprocherduservicePVouqualiteenfonctiondurisque": "",
+          "ICMKBISExpiryDate": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMSupplierName": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAmendment5SignatoryDate": null,
+          "ICMSiret": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAbbvieSignatoryTitle": "",
+          "ICMAmendmentEffectiveDate2": null,
+          "ICMdummyNotUsed": "",
+          "ICMServicesDescription": "",
+          "ICMTransparenceAttributeActive": "",
+          "ICMSupplierContactEmail": "",
+          "ICMTemplate": {
+            "Name": "",
+            "Version": "",
+            "Extensions": null
+          },
+          "ICMContactLegal": "",
+          "ICMIsAmendment": false,
+          "ICMTerminatedParentId": "",
+          "ICMSupplierSignatoryName2": "",
+          "ICMSelectAmendmentcreationreason": [
+
+          ],
+          "ICMSelectOnBehalfofUser": "",
+          "ICMDMOSLabel": "",
+          "ICMStreetName": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMExpiryDate": null,
+          "ICMTotalamountofparentagreementandamendments": null,
+          "ICMAmendment10SignatoryDate": null,
+          "ICMSignatoryDateofthePreviousAmendment": null,
+          "ICMIfitisanamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment7SignatoryDate": null,
+          "ICMIsExecutedWithoutSignedCopy": false,
+          "ICMSupplierSignatoryTitle": "",
+          "ICMReputationalRisk": "",
+          "ICMExternalSignatory": "",
+          "ICMContratpapierrecu": "Non",
+          "ICMPostalCode": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMSignatureType": "Manual Signature",
+          "ICMAssuranceExpiryDate": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAmendment9SignatoryDate": null,
+          "ICMAmendment8SignatoryDate": null,
+          "ICMDateofadditionalprestation": null,
+          "ICMSignatureSequence": "Internal First",
+          "ICMAmendment6SignatoryDate": null,
+          "ICMAdditionalchargesforadditionalprestation": {
+            "Value": 0.0,
+            "Currency": ""
+          },
+          "ICMIstherePreviousAmendment": "",
+          "ICMSubcontractingDMOS": "",
+          "ICMAmendment2SignatoryDate": null,
+          "ICMAgreementCode": "2021-6-TRP_05626",
+          "ICMCreationDate": "",
+          "ICMIfnotamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment4SignatoryDate": null,
+          "ICMFichecontratarchivee": "Non",
+          "ICMAmendment3SignatoryDate": null,
+          "ICMAbbVieContactPerson": "",
+          "ICMLinktoVendorMaster": "",
+          "Name": "",
+          "ICMContactLegalAvantDeLoaderUnDocumentAmendmentCollection": null,
+          "ICMAttachementsSupplementaires": null,
+          "ICMAttachements": null,
+          "ICMScanDuContratSigne": null,
+          "BusinessStatus": "Draft",
+          "TypeOfPaper": "Third Party",
+          "IsPublished": false,
+          "IsDeviated": false,
+          "Status": "Draft",
+          "CreatedBy": "clmadmin@waadicm.onmicrosoft.com",
+          "CreatedDate": "2021-06-11T10:36:39",
+          "ModifiedBy": "clmadmin@waadicm.onmicrosoft.com",
+          "ModifiedDate": "2021-06-11T10:37:04",
+          "SysId": "f05fca5e-57df-4012-8fd5-f4e959a9568a",
+          "TypeOfContract": "Agreement",
+          "ContractTypeName": "ICMContactLegalAvantDeLoaderUnDocument"
+        },
+        {
+          "ICMIsAssignment": false,
+          "ICMValidationComments": "",
+          "ICMAmount": 3000.0,
+          "ICMIBAN": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMSupplierContactName": "",
+          "ICMParentContractType": null,
+          "ICMTriggerNotifications": 1,
+          "ICMIsAgreementAlreadySignedByBothParties": "Non",
+          "ICMURSSAFExpiryDate": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMIsTermination": false,
+          "ICMLastSignedDate": null,
+          "ICMTerminationDate": null,
+          "ICMVATRegNo": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMDepartment": {
+            "UniqueValues": [
+              "5415517c-c662-4962-a9dd-dad4eb31df5e"
+            ],
+            "DisplayValue": "HR - HCV-Spé-Medical-DAIE-RA/QA"
+          },
+          "ICMAssignedParentId": "",
+          "ICMCreatingonBehalfofOther": "Non",
+          "ICMAdditionalpresentationdescription": "",
+          "ICMVendortoSignElectronically": "Non",
+          "ICMICMPersonalDataGDPR": "",
+          "ICMLocation": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAbbvieSignatoryName": "",
+          "ICMEffectiveDate": "2021-06-11T00:00:00",
+          "ICMTotalAmount": {
+            "Value": 3000.0,
+            "Currency": "EUR"
+          },
+          "ICMLabellastsigneddatetobefilledafterexecutionofagreement": "",
+          "FilePath": {
+            "Content": null,
+            "Extension": null,
+            "Path": ""
+          },
+          "ICMNumberofthisAmendment": "",
+          "ICMUseAmendmentTemplate": false,
+          "ICMReasonforchangingtheamount": [
+
+          ],
+          "ICMAbbvieContactEmail": "",
+          "ICMCountry": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMCopyTerminationDate": null,
+          "ICMAbbvieSignatoryTitle2": "",
+          "ICMCurrency": "EUR",
+          "ICMCausefortheamendmentcreation": "",
+          "ICMIsAssigned": false,
+          "ICMNewcontracttotalamount": null,
+          "ICMImpactPharmaceutique": "",
+          "ICMRiskClaimQualityProductOrMaterovigilance": "",
+          "ICMAbbvieSignatoryName2": "",
+          "ICMSerapprocherduservicePVouqualiteenfonctiondurisque": "",
+          "ICMKBISExpiryDate": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMSupplierName": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAmendment5SignatoryDate": null,
+          "ICMSiret": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAbbvieSignatoryTitle": "",
+          "ICMAmendmentEffectiveDate2": null,
+          "ICMdummyNotUsed": "",
+          "ICMServicesDescription": "",
+          "ICMTransparenceAttributeActive": "",
+          "ICMSupplierContactEmail": "",
+          "ICMTemplate": {
+            "Name": "",
+            "Version": "",
+            "Extensions": null
+          },
+          "ICMContactLegal": "",
+          "ICMIsAmendment": false,
+          "ICMTerminatedParentId": "",
+          "ICMSupplierSignatoryName2": "",
+          "ICMSelectAmendmentcreationreason": [
+
+          ],
+          "ICMSelectOnBehalfofUser": "",
+          "ICMDMOSLabel": "",
+          "ICMStreetName": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMExpiryDate": "2021-07-02T00:00:00",
+          "ICMTotalamountofparentagreementandamendments": null,
+          "ICMAmendment10SignatoryDate": null,
+          "ICMSignatoryDateofthePreviousAmendment": null,
+          "ICMIfitisanamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment7SignatoryDate": null,
+          "ICMIsExecutedWithoutSignedCopy": false,
+          "ICMSupplierSignatoryTitle": "",
+          "ICMReputationalRisk": "",
+          "ICMExternalSignatory": "",
+          "ICMContratpapierrecu": "Non",
+          "ICMPostalCode": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMSignatureType": "Manual Signature",
+          "ICMAssuranceExpiryDate": {
+            "UniqueValues": [
+
+            ],
+            "DisplayValue": ""
+          },
+          "ICMAmendment9SignatoryDate": null,
+          "ICMAmendment8SignatoryDate": null,
+          "ICMDateofadditionalprestation": null,
+          "ICMSignatureSequence": "Internal First",
+          "ICMAmendment6SignatoryDate": null,
+          "ICMAdditionalchargesforadditionalprestation": {
+            "Value": 0.0,
+            "Currency": ""
+          },
+          "ICMIstherePreviousAmendment": "",
+          "ICMSubcontractingDMOS": "",
+          "ICMAmendment2SignatoryDate": null,
+          "ICMAgreementCode": "2021-6-TRP_05625",
+          "ICMCreationDate": "",
+          "ICMIfnotamendmentexternalsignatorynameandtitleinformationinstruction": "",
+          "ICMAmendment4SignatoryDate": null,
+          "ICMFichecontratarchivee": "Non",
+          "ICMAmendment3SignatoryDate": null,
+          "ICMAbbVieContactPerson": "",
+          "ICMLinktoVendorMaster": "",
+          "Name": "Test",
+          "ICMContactLegalAvantDeLoaderUnDocumentAmendmentCollection": null,
+          "ICMAttachementsSupplementaires": null,
+          "ICMAttachements": null,
+          "ICMScanDuContratSigne": null,
+          "BusinessStatus": "Draft",
+          "TypeOfPaper": "Third Party",
+          "IsPublished": false,
+          "IsDeviated": false,
+          "Status": "Draft",
+          "CreatedBy": "clmadmin@waadicm.onmicrosoft.com",
+          "CreatedDate": "2021-06-11T08:57:28",
+          "ModifiedBy": "clmadmin@waadicm.onmicrosoft.com",
+          "ModifiedDate": "2021-06-11T08:57:29",
+          "SysId": "80a4461d-14fb-4926-b050-27ce41ada03d",
+          "TypeOfContract": "Agreement",
+          "ContractTypeName": "ICMContactLegalAvantDeLoaderUnDocument"
+        }
+      ],
+      "HasMoreData": true,
+      "PagingData": {
+        "RowsPerPage": 100,
+        "TotalNumberOfPages": -1,
+        "PageNumber": 1,
+        "TotalRowCount": -1
+      }
+    }
+  }
+}

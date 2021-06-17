@@ -1,0 +1,138 @@
+/* © Microsoft Corporation. All rights reserved. */
+
+body,
+html,
+.Root {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  min-height: '420px';
+}
+
+.wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ui-provider {
+  height: 0;
+}
+
+#icm_head {
+    overflow: hidden !important;
+    color: rgb(0, 0, 0) !important;
+    font-weight: 200 !important;
+    text-align: right !important;
+    line-height: 34.58px !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+}
+
+#icm_name {
+    color: rgb(0, 99, 177) !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+}
+
+#icm_code {
+    color: rgb(100, 100, 100) !important;
+    font-weight: 200 !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+}
+
+#icm_status_expired {
+    overflow: hidden !important;
+    color: rgb(255, 255, 255) !important;
+    font-weight: 600 !important;
+    line-height: 22.61px !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    background: rgb(183, 92, 0) !important;
+    padding: 3px 10px 3px 10px !important;
+    border-radius: 5px;
+}
+
+#icm_status {
+    overflow: hidden !important;
+    color: rgb(255, 255, 255) !important;
+    font-weight: 600 !important;
+    text-align: right !important;
+    line-height: 22.61px !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+    background: rgb(100, 100, 100) !important;
+    padding: 3px 10px 3px 10px !important;
+    border-radius: 5px;
+}
+
+#icm_createdby {
+    overflow: hidden !important;
+    color: rgb(0, 0, 0) !important;
+    font-weight: 600 !important;
+    text-align: left !important;
+    line-height: 18.62px !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+}
+
+#icm_createddate {
+    overflow: hidden !important;
+    color: rgb(100, 100, 100) !important;
+    font-weight: 400 !important;
+    text-align: left !important;
+    line-height: 18.62px !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+}
+
+#icm_amount {
+    overflow: hidden !important;
+    color: rgb(2, 138, 2) !important;
+    font-weight: 600 !important;
+    text-align: right !important;
+    line-height: 22.61px !important;
+    overflow-wrap: break-word !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+}
+
+.ac-pushButton.style-positive {
+    background-color: #0078D7;
+    color: white;
+}
+
+.ac-pushButton {
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid #DDDDDD;
+    background-color: #FFFFFF;
+    color: #0063B1;
+}
+
+.ac-actionSet {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+}
+
